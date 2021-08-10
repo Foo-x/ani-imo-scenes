@@ -1,9 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
-    siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
+    title: `あにいも名場面集`,
+    description: `あにはんといもはんの名場面を集めたサイトです。`,
+    siteUrl: `https://example.com/`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -20,8 +19,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `あにいも名場面集`,
+        short_name: `あにいも名場面集`,
         start_url: `/`,
         background_color: `#663399`,
         theme_color: `#663399`,

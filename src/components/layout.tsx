@@ -9,8 +9,8 @@ type Props = {
 }
 
 const Layout: React.FC<Props> = ({ children }) => {
-  const data = useStaticQuery<GatsbyTypes.SiteTitleQueryQuery>(graphql`
-    query SiteTitleQuery {
+  const data = useStaticQuery<GatsbyTypes.SiteTitleQuery>(graphql`
+    query SiteTitle {
       site {
         siteMetadata {
           title

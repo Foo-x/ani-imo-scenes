@@ -2,7 +2,6 @@ import { graphql, useStaticQuery } from "gatsby"
 import { ReactNodeLike } from "prop-types"
 import * as React from "react"
 import Header from "./header"
-import "./layout.css"
 
 type Props = {
   children: ReactNodeLike

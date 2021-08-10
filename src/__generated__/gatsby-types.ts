@@ -2838,10 +2838,10 @@ type SiteTitleQueryVariables = Exact<{ [key: string]: never; }>;
 
 type SiteTitleQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
 
-type SeoQueryVariables = Exact<{ [key: string]: never; }>;
+type UsingTypeScriptQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type SeoQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description'>> }> };
+type UsingTypeScriptQuery = { readonly site: Maybe<Pick<Site, 'buildTime'>> };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
@@ -2869,10 +2869,10 @@ type GatsbyImageSharpFluid_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio
 
 type GatsbyImageSharpFluid_withWebp_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
 
-type UsingTypeScriptQueryVariables = Exact<{ [key: string]: never; }>;
+type SeoQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type UsingTypeScriptQuery = { readonly site: Maybe<Pick<Site, 'buildTime'>> };
+type SeoQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description'>> }> };
 
 type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 

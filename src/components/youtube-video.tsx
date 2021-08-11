@@ -30,9 +30,13 @@ const YouTubeVideo: React.FC<Props> = ({ videoId, start, end }) => {
       onReady={event => {
         setPlayer(event.target)
       }}
-      onStateChange={event => {
-        if (event.data === YouTube.PlayerState.PLAYING) {
-          setPlayingPlayer(event.target)
+      onPlay={event => {
+        setPlayingPlayer(event.target)
+      }}
+      onEnd={_ => {
+        if (player && start !== undefined) {
+          player.seekTo(start, true)
+          player.pauseVideo()
         }
       }}
     />

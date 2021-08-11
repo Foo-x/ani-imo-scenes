@@ -16,9 +16,9 @@
     "jsx": "react-jsx",
     "newLine": "lf",
     "outDir": "dist/",
-    "baseUrl": "src",
+    "baseUrl": "./",
     "paths": {
-      "styles/*": ["styles/*"]
+      "~/*": ["src/*"]
     },
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },

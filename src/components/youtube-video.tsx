@@ -1,5 +1,5 @@
 import * as React from "react"
-import * as styles from "styles/components/youtube-video.module.css"
+import * as styles from "~/styles/components/youtube-video.module.css"
 
 type Props = {
   videoId: string

@@ -1,19 +1,41 @@
-import * as React from "react"
+import React, { useContext, useEffect, useState } from "react"
+import YouTube from "react-youtube"
+import { YouTubePlayerContext } from "~/contexts/youtube-context"
 import * as styles from "~/styles/components/youtube-video.module.css"
 
 type Props = {
   videoId: string
+  start?: number
+  end?: number
 }
 
-const YouTubeVideo: React.FC<Props> = ({ videoId }) => {
+const YouTubeVideo: React.FC<Props> = ({ videoId, start, end }) => {
+  const [playingPlayer, setPlayingPlayer] = useContext(YouTubePlayerContext)
+  const [player, setPlayer] = useState<YT.Player>()
+
+  useEffect(() => {
+    if (player?.getPlayerState() !== YouTube.PlayerState.PLAYING) {
+      return
+    }
+    if (playingPlayer !== player) {
+      player.pauseVideo()
+    }
+  }, [playingPlayer])
   return (
-    <div className={styles.container}>
-      <iframe
-        className={styles.video}
-        src={`https://www.youtube.com/embed/${videoId}`}
-        allowFullScreen
-      ></iframe>
-    </div>
+    <YouTube
+      containerClassName={styles.container}
+      className={styles.video}
+      videoId={videoId}
+      opts={{ playerVars: { start, end } }}
+      onReady={event => {
+        setPlayer(event.target)
+      }}
+      onStateChange={event => {
+        if (event.data === YouTube.PlayerState.PLAYING) {
+          setPlayingPlayer(event.target)
+        }
+      }}
+    />
   )
 }
 

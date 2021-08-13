@@ -1,0 +1,20 @@
+.title {
+  margin: 0.5rem 0 0 0;
+}
+
+.info {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0.5rem 0 0 0;
+  list-style: none;
+  font-size: 0.9rem;
+  color: #878787;
+}
+
+.info li {
+  margin: 0;
+}
+
+.info li:not(:first-of-type):before {
+  content: "・";
+}

@@ -15,12 +15,15 @@ export type VideoInfo = {
 }
 
 export const getVideoInfos = async (): Promise<VideoInfo[] | undefined> => {
-  const response = await fetch(url)
-
-  return ((await response.json()) as Omit<VideoInfo, "index">[]).map(
-    (videoInfo, index: number) => ({
-      index,
-      ...videoInfo,
-    })
-  )
+  try {
+    const response = await fetch(url)
+    return ((await response.json()) as Omit<VideoInfo, "index">[]).map(
+      (videoInfo, index: number) => ({
+        index,
+        ...videoInfo,
+      })
+    )
+  } catch (_) {
+    return
+  }
 }

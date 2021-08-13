@@ -1,13 +1,16 @@
 import { useLiveQuery } from "dexie-react-hooks"
 import { PageProps } from "gatsby"
 import React, { useEffect, useState } from "react"
+import Layout from "~/components/layout"
+import Seo from "~/components/seo"
 import VideoCard from "~/components/video-card"
 import { YouTubePlayerContext } from "~/contexts/youtube-context"
 import { db } from "~/modules/db"
 import { getVideoInfos } from "~/modules/google-sheets"
+import { getLastFetched, setLastFetched } from "~/modules/local-storage"
 import * as styles from "~/styles/pages/index.module.css"
-import Layout from "../components/layout"
-import Seo from "../components/seo"
+
+const fetchInterval = 60000
 
 const IndexPage: React.FC<PageProps> = () => {
   const [player, setPlayer] = useState<YT.Player | null>(null)
@@ -15,9 +18,13 @@ const IndexPage: React.FC<PageProps> = () => {
   const videoInfos = useLiveQuery(() => db.videoInfos.toArray(), [], [])
 
   useEffect(() => {
+    if (Date.now() - (getLastFetched() ?? 0) < fetchInterval) {
+      return
+    }
     getVideoInfos().then(_videoInfos => {
       if (_videoInfos) {
         db.videoInfos.bulkPut(_videoInfos)
+        setLastFetched()
       }
     })
   }, [])

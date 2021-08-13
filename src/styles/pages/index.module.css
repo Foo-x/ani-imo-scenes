@@ -1,3 +1,9 @@
 .videoCard:not(:first-of-type) {
-  margin-top: 1.5rem;
+  margin-top: 5rem;
+}
+
+@media (max-width: 37.5em) {
+  .videoCard:not(:first-of-type) {
+    margin-top: 3rem;
+  }
 }

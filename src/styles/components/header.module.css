@@ -1,0 +1,26 @@
+.header {
+  margin-bottom: var(--spacing-6);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.titleContainer {
+  margin: 0 auto;
+  max-width: 60rem;
+  padding: var(--spacing-6) var(--spacing-4);
+}
+
+.title {
+  margin: 0;
+  font-weight: var(--fontWeight-bold);
+  font-size: var(--fontSize-4);
+}
+
+@media (max-width: 37.5em) {
+  .titleContainer {
+    padding: var(--spacing-4) var(--spacing-4);
+  }
+
+  .title {
+    font-size: var(--fontSize-4);
+  }
+}

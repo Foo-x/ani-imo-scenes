@@ -1,13 +1,13 @@
 .title {
-  margin: 0.5rem 0 0 0;
+  margin: 1.2rem 0 0 0;
+  font-size: var(--fontSize-3);
 }
 
 .info {
   display: flex;
   flex-wrap: wrap;
-  margin: 0.5rem 0 0 0;
+  margin: 1rem 0 0 0;
   list-style: none;
-  font-size: 0.9rem;
   color: #878787;
 }
 
@@ -17,4 +17,16 @@
 
 .info li:not(:first-of-type):before {
   content: "・";
+}
+
+@media (max-width: 37.5em) {
+  .title {
+    font-size: var(--fontSize-1);
+    margin: 0.8rem 0 0 0;
+  }
+
+  .info {
+    margin: 0.6rem 0 0 0;
+    font-size: var(--fontSize-0);
+  }
 }

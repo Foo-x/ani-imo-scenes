@@ -1,20 +1,23 @@
+import { useLiveQuery } from "dexie-react-hooks"
 import { PageProps } from "gatsby"
 import React, { useEffect, useState } from "react"
 import VideoCard from "~/components/video-card"
 import { YouTubePlayerContext } from "~/contexts/youtube-context"
-import { getVideoInfos, VideoInfo } from "~/modules/google-sheets"
+import { db } from "~/modules/db"
+import { getVideoInfos } from "~/modules/google-sheets"
 import * as styles from "~/styles/pages/index.module.css"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
 const IndexPage: React.FC<PageProps> = () => {
   const [player, setPlayer] = useState<YT.Player | null>(null)
-  const [videoInfos, setVideoInfos] = useState<VideoInfo[]>([])
+
+  const videoInfos = useLiveQuery(() => db.videoInfos.toArray(), [], [])
 
   useEffect(() => {
     getVideoInfos().then(_videoInfos => {
       if (_videoInfos) {
-        setVideoInfos(_videoInfos)
+        db.videoInfos.bulkPut(_videoInfos)
       }
     })
   }, [])

@@ -1,0 +1,9 @@
+.heading {
+  font-size: var(--fontSize-4);
+}
+
+@media (max-width: 37.5em) {
+  .heading {
+    margin-top: var(--spacing-10);
+  }
+}

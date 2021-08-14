@@ -50,6 +50,17 @@ const AboutPage: React.FC<PageProps> = () => {
         </a>{" "}
         で管理しています。シートの使い方はリンク先をご覧ください。
       </p>
+      <p>
+        管理人は「ふー」(
+        <a
+          href="https://twitter.com/f_akira_s"
+          target="_blank"
+          rel="nofollow noopener noreferrer"
+        >
+          @f_akira_s
+        </a>
+        ) です。
+      </p>
       <h2 className={styles.heading}>アクセス解析ツールについて</h2>
       <p>
         当サイトでは「Googleアナリティクス」を導入しています。このツールではデータを収集するためにCookieを使用しています。データは匿名で収集されており、個人を特定できるものではありません。
@@ -69,7 +80,6 @@ const AboutPage: React.FC<PageProps> = () => {
           target="_blank"
           rel="nofollow noopener noreferrer"
         >
-          {" "}
           Googleポリシーと規約
         </a>
         をご覧ください。

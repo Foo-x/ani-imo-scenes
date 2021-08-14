@@ -1,3 +1,7 @@
+.heading {
+  font-size: var(--fontSize-4);
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -13,6 +17,7 @@
 
 .formLabelValue {
   display: block;
+  font-weight: var(--fontWeight-bold);
 }
 
 .formInput,

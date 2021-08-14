@@ -33,7 +33,7 @@ const AddPage: React.FC<PageProps> = () => {
   return (
     <Layout>
       <Seo title="名場面の追加" />
-      <h2>名場面の追加</h2>
+      <h2 className={styles.heading}>名場面の追加</h2>
       <p>
         <a
           href="https://docs.google.com/spreadsheets/d/1aT4i9__D9y-JOgfmfBxL1TYJSyMmRX_OhGcRr83XL_0/edit?usp=sharing"

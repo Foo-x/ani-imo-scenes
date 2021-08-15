@@ -17,7 +17,15 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
   const [player, setPlayer] = useState<YT.Player | null>(null)
   const [isReady, setIsReady] = useState(false)
 
-  const videoInfos = useLiveQuery(() => db.videoInfos.toArray(), [], [])
+  const videoInfos = useLiveQuery(
+    async () => {
+      const result = await db.videoInfos.toArray()
+      result.sort((a, b) => b.createdAt.localeCompare(a.createdAt))
+      return result
+    },
+    [],
+    []
+  )
 
   useEffect(() => {
     if (Date.now() - (getLastFetched() ?? 0) < fetchInterval) {

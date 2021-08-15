@@ -2884,4 +2884,9 @@ type GatsbyImageSharpFluid_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio
 
 type GatsbyImageSharpFluid_withWebp_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
 
+type HeaderQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type HeaderQuery = { readonly add: Maybe<Pick<File, 'publicURL'>>, readonly addLineal: Maybe<Pick<File, 'publicURL'>>, readonly about: Maybe<Pick<File, 'publicURL'>>, readonly aboutLineal: Maybe<Pick<File, 'publicURL'>> };
+
 }

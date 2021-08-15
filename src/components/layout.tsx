@@ -23,7 +23,10 @@ const Layout: React.FC<Props> = ({ children, location }) => {
 
   return (
     <>
-      <Header siteTitle={data.site?.siteMetadata?.title || `Title`} />
+      <Header
+        siteTitle={data.site?.siteMetadata?.title || `Title`}
+        location={location}
+      />
       <div className={styles.container}>
         <main>{children}</main>
       </div>

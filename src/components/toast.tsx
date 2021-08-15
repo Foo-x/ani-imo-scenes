@@ -3,7 +3,6 @@ import ReactDOM from "react-dom"
 import * as styles from "~/styles/components/toast.module.css"
 
 const displayTimeMilli = 3000
-const toastContainer = document.createElement("div")
 
 type Props = {
   text: string
@@ -66,7 +65,12 @@ const Toast: React.FC<Props> = ({ text, onHidden }) => {
   )
 }
 
+let toastContainer: HTMLDivElement
+
 export const toast = (text: string) => {
+  if (!toastContainer) {
+    toastContainer = document.createElement("div")
+  }
   if (!document.body.contains(toastContainer)) {
     document.body.appendChild(toastContainer)
   }

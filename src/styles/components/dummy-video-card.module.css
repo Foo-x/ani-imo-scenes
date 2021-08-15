@@ -1,0 +1,31 @@
+.video {
+  width: 100%;
+  padding-top: 56.25%;
+  background-color: #d6d6d6;
+}
+
+.title {
+  width: 50%;
+  margin: 1.2rem 0 0 0;
+  font-size: var(--fontSize-3);
+  background-color: #d6d6d6;
+}
+
+.info {
+  width: 20%;
+  margin: 1rem 0 0 0;
+  padding: 0;
+  background-color: #d6d6d6;
+}
+
+@media (max-width: 37.5em) {
+  .title {
+    font-size: var(--fontSize-1);
+    margin: 0.8rem 0 0 0;
+  }
+
+  .info {
+    margin: 0.6rem 0 0 0;
+    font-size: var(--fontSize-0);
+  }
+}

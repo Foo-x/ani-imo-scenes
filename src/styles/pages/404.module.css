@@ -1,0 +1,13 @@
+.container {
+  text-align: center;
+  margin: 0 auto;
+  max-width: var(--maxWidth-wrapper);
+}
+
+.heading {
+  font-size: var(--fontSize-6);
+}
+
+.link {
+  margin-top: var(--spacing-4);
+}

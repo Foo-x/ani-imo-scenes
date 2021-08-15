@@ -2833,15 +2833,15 @@ type SiteBuildMetadataSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
+type NotFoundQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type NotFoundQuery = { readonly sleepingCat: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }> };
+
 type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
-
-type UsingTypeScriptQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type UsingTypeScriptQuery = { readonly site: Maybe<Pick<Site, 'buildTime'>> };
 
 type FooterQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2852,6 +2852,11 @@ type SiteTitleQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type SiteTitleQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
+
+type HeaderQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type HeaderQuery = { readonly add: Maybe<Pick<File, 'publicURL'>>, readonly addLineal: Maybe<Pick<File, 'publicURL'>>, readonly about: Maybe<Pick<File, 'publicURL'>>, readonly aboutLineal: Maybe<Pick<File, 'publicURL'>> };
 
 type SeoQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2883,10 +2888,5 @@ type GatsbyImageSharpFluid_withWebp_tracedSVGFragment = Pick<ImageSharpFluid, 't
 type GatsbyImageSharpFluid_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
 
 type GatsbyImageSharpFluid_withWebp_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
-
-type HeaderQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type HeaderQuery = { readonly add: Maybe<Pick<File, 'publicURL'>>, readonly addLineal: Maybe<Pick<File, 'publicURL'>>, readonly about: Maybe<Pick<File, 'publicURL'>>, readonly aboutLineal: Maybe<Pick<File, 'publicURL'>> };
 
 }

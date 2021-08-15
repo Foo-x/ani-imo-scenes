@@ -3,6 +3,8 @@ import React from "react"
 import { useForm } from "react-hook-form"
 import Layout from "~/components/layout"
 import Seo from "~/components/seo"
+import { toast } from "~/components/toast"
+import { postVideoInfo, PostVideoInfo } from "~/modules/google-sheets"
 import * as styles from "~/styles/pages/add.module.css"
 
 const requiredMessage = "この値は必須です。"
@@ -20,15 +22,50 @@ type FormData = {
   createdBy: string
 }
 
+const padNumber = (value: number): string => {
+  return ("" + value).padStart(2, "0")
+}
+
 const AddPage: React.FC<PageProps> = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
+    setValue,
   } = useForm<FormData>()
+
   const onSubmit = handleSubmit(data => {
-    // TODO
-    console.log(data)
+    const start = Number.isNaN(data.startHours)
+      ? `${data.startMinutes}:${padNumber(data.startSeconds)}`
+      : `${data.startHours}:${padNumber(data.startMinutes)}:${padNumber(
+          data.startSeconds
+        )}`
+    const end = Number.isNaN(data.endHours)
+      ? `${data.endMinutes}:${padNumber(data.endSeconds)}`
+      : `${data.endHours}:${padNumber(data.endMinutes)}:${padNumber(
+          data.endSeconds
+        )}`
+
+    const createdAt = (() => {
+      const result = new Date()
+      return `${result.getFullYear()}/${padNumber(
+        result.getMonth() + 1
+      )}/${padNumber(result.getDate())}`
+    })()
+    const videoInfo: PostVideoInfo = {
+      title: data.title,
+      url: data.url,
+      start,
+      end,
+      person: data.person,
+      createdAt,
+      createdBy: data.createdBy,
+    }
+    toast("追加ありがとうございます！")
+    postVideoInfo(videoInfo)
+    reset()
+    setValue("createdBy", data.createdBy)
   })
   return (
     <Layout>

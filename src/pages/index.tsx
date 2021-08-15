@@ -31,7 +31,7 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
 
   return (
     <Layout location={location}>
-      <Seo title="Home" />
+      <Seo />
       <YouTubePlayerContext.Provider value={[player, setPlayer]}>
         {videoInfos.map(videoInfo => (
           <div className={styles.videoCard}>

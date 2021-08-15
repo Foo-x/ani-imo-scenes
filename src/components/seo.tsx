@@ -6,7 +6,7 @@ type Props = {
   description?: string
   lang?: string
   meta?: JSX.IntrinsicElements["meta"][]
-  title: string
+  title?: string
 }
 
 const Seo: React.FC<Props> = ({
@@ -30,14 +30,14 @@ const Seo: React.FC<Props> = ({
 
   const metaDescription = description || site?.siteMetadata?.description
   const defaultTitle = site?.siteMetadata?.title
+  const actualTitle = title ? `${title} | ${defaultTitle}` : defaultTitle
 
   return (
     <Helmet
       htmlAttributes={{
         lang,
       }}
-      title={title}
-      titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : undefined}
+      title={actualTitle}
       meta={[
         ...[
           {
@@ -46,7 +46,7 @@ const Seo: React.FC<Props> = ({
           },
           {
             property: `og:title`,
-            content: title,
+            content: actualTitle,
           },
           {
             property: `og:description`,

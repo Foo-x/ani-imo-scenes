@@ -12,7 +12,7 @@ import * as styles from "~/styles/pages/index.module.css"
 
 const fetchInterval = 60000
 
-const IndexPage: React.FC<PageProps> = () => {
+const IndexPage: React.FC<PageProps> = ({ location }) => {
   const [player, setPlayer] = useState<YT.Player | null>(null)
 
   const videoInfos = useLiveQuery(() => db.videoInfos.toArray(), [], [])
@@ -30,7 +30,7 @@ const IndexPage: React.FC<PageProps> = () => {
   }, [])
 
   return (
-    <Layout>
+    <Layout location={location}>
       <Seo title="Home" />
       <YouTubePlayerContext.Provider value={[player, setPlayer]}>
         {videoInfos.map(videoInfo => (

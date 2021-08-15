@@ -26,7 +26,7 @@ const padNumber = (value: number): string => {
   return ("" + value).padStart(2, "0")
 }
 
-const AddPage: React.FC<PageProps> = () => {
+const AddPage: React.FC<PageProps> = ({ location }) => {
   const {
     register,
     handleSubmit,
@@ -68,7 +68,7 @@ const AddPage: React.FC<PageProps> = () => {
     setValue("createdBy", data.createdBy)
   })
   return (
-    <Layout>
+    <Layout location={location}>
       <Seo title="名場面の追加" />
       <h2 className={styles.heading}>名場面の追加</h2>
       <p>

@@ -4,9 +4,9 @@ import Layout from "~/components/layout"
 import Seo from "~/components/seo"
 import * as styles from "~/styles/pages/about.module.css"
 
-const AboutPage: React.FC<PageProps> = () => {
+const AboutPage: React.FC<PageProps> = ({ location }) => {
   return (
-    <Layout>
+    <Layout location={location}>
       <Seo title="このサイトについて" />
       <h2 className={styles.heading}>このサイトについて</h2>
       <p>このサイトでは、以下の YouTube チャンネルの名場面を集めています。</p>

@@ -1,13 +1,15 @@
 .container {
   margin: 0 auto;
   max-width: 960px;
-  padding: 0 var(--spacing-4) var(--spacing-16);
+  padding: 0 var(--spacing-4)
+    calc(var(--spacing-16) + env(safe-area-inset-bottom));
 }
 
 @media (max-width: 37.5em) {
   .container {
     margin: 0 auto;
     max-width: 960px;
-    padding: 0 var(--spacing-4) var(--spacing-20);
+    padding: 0 var(--spacing-4)
+      calc(var(--spacing-20) + env(safe-area-inset-bottom));
   }
 }

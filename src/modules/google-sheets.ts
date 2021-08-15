@@ -1,7 +1,7 @@
 const url =
   "https://script.google.com/macros/s/AKfycbyQXboYBuAKdPxnXkRP7y78Kh464bIPuXn_m-F3PEMgHTN-i0Sarqp_vToKgmQX49_k/exec"
 
-export type VideoInfo = {
+export type GetVideoInfo = {
   index: number
   title: string
   person: string
@@ -14,10 +14,20 @@ export type VideoInfo = {
   postedAt: string
 }
 
-export const getVideoInfos = async (): Promise<VideoInfo[] | undefined> => {
+export type PostVideoInfo = {
+  title: string
+  url: string
+  start: string
+  end: string
+  person: string
+  createdAt: string
+  createdBy: string
+}
+
+export const getVideoInfos = async (): Promise<GetVideoInfo[] | undefined> => {
   try {
     const response = await fetch(url)
-    return ((await response.json()) as Omit<VideoInfo, "index">[]).map(
+    return ((await response.json()) as Omit<GetVideoInfo, "index">[]).map(
       (videoInfo, index: number) => ({
         index,
         ...videoInfo,
@@ -26,4 +36,15 @@ export const getVideoInfos = async (): Promise<VideoInfo[] | undefined> => {
   } catch (_) {
     return
   }
+}
+
+export const postVideoInfo = async (
+  videoInfo: PostVideoInfo
+): Promise<void> => {
+  try {
+    await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(videoInfo),
+    })
+  } catch (_) {}
 }

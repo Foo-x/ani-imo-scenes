@@ -1,8 +1,8 @@
 import Dexie from "dexie"
-import { VideoInfo } from "./google-sheets"
+import { GetVideoInfo } from "./google-sheets"
 
 class DB extends Dexie {
-  videoInfos: Dexie.Table<VideoInfo, number>
+  videoInfos: Dexie.Table<GetVideoInfo, number>
 
   constructor() {
     super("ani-imo-scenes-db")

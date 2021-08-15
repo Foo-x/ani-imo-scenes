@@ -2833,15 +2833,30 @@ type SiteBuildMetadataSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
-type SiteTitleQueryVariables = Exact<{ [key: string]: never; }>;
+type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type SiteTitleQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
+type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
 type UsingTypeScriptQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type UsingTypeScriptQuery = { readonly site: Maybe<Pick<Site, 'buildTime'>> };
+
+type FooterQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type FooterQuery = { readonly home: Maybe<Pick<File, 'publicURL'>>, readonly homeLineal: Maybe<Pick<File, 'publicURL'>>, readonly add: Maybe<Pick<File, 'publicURL'>>, readonly addLineal: Maybe<Pick<File, 'publicURL'>>, readonly about: Maybe<Pick<File, 'publicURL'>>, readonly aboutLineal: Maybe<Pick<File, 'publicURL'>> };
+
+type SiteTitleQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type SiteTitleQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
+
+type SeoQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type SeoQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description'>> }> };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
@@ -2868,15 +2883,5 @@ type GatsbyImageSharpFluid_withWebp_tracedSVGFragment = Pick<ImageSharpFluid, 't
 type GatsbyImageSharpFluid_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
 
 type GatsbyImageSharpFluid_withWebp_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
-
-type SeoQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type SeoQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description'>> }> };
-
-type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
 }

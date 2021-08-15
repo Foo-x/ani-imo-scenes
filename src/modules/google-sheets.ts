@@ -1,5 +1,5 @@
 const url =
-  "https://script.google.com/macros/s/AKfycbyQXboYBuAKdPxnXkRP7y78Kh464bIPuXn_m-F3PEMgHTN-i0Sarqp_vToKgmQX49_k/exec"
+  "https://script.google.com/macros/s/AKfycbzAl5EyC8LU-27Qn3vcLsGtYaZHt3TtoENobiaSPZ98HqNZPYfS11lsXR2PgqF0pNfUXA/exec"
 
 export type GetVideoInfo = {
   index: number

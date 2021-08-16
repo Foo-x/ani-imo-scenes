@@ -55,4 +55,8 @@
   .title {
     font-size: var(--fontSize-4);
   }
+
+  .items {
+    display: none;
+  }
 }

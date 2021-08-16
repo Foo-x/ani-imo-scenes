@@ -15,14 +15,21 @@ const Seo: React.FC<Props> = ({
   meta = [],
   title,
 }) => {
-  const { site } = useStaticQuery<GatsbyTypes.SeoQuery>(
+  const { site, ogp } = useStaticQuery<GatsbyTypes.SeoQuery>(
     graphql`
       query Seo {
         site {
           siteMetadata {
             title
             description
+            siteUrl
           }
+        }
+        ogp: file(
+          sourceInstanceName: { eq: "images" }
+          relativePath: { eq: "ogp.png" }
+        ) {
+          publicURL
         }
       }
     `
@@ -55,6 +62,10 @@ const Seo: React.FC<Props> = ({
           {
             property: `og:type`,
             content: `website`,
+          },
+          {
+            property: `og:image`,
+            content: site!.siteMetadata!.siteUrl! + ogp?.publicURL,
           },
           {
             name: `twitter:card`,

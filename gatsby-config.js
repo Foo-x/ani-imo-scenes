@@ -2,9 +2,9 @@ module.exports = {
   siteMetadata: {
     title: `あにいも名場面集`,
     description: `あにはんといもはんの名場面を集めたサイトです。`,
-    siteUrl: `https://foo-x.github.io/ani-imo-scenes/`,
+    siteUrl: `https://foo-x.github.io`,
   },
-  pathPrefix: `/ani-imo-scenes`,
+  pathPrefix: process.env.NODE_ENV === `development` ? `` : `/ani-imo-scenes`,
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,

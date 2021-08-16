@@ -4,6 +4,7 @@ module.exports = {
     description: `あにはんといもはんの名場面を集めたサイトです。`,
     siteUrl: `https://foo-x.github.io/ani-imo-scenes/`,
   },
+  pathPrefix: `/ani-imo-scenes`,
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,

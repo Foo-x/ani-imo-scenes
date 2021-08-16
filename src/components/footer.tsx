@@ -1,4 +1,4 @@
-import { graphql, Link, useStaticQuery } from "gatsby"
+import { graphql, Link, useStaticQuery, withPrefix } from "gatsby"
 import React from "react"
 import { useMediaQuery } from "react-responsive"
 import * as styles from "~/styles/components/footer.module.css"
@@ -50,9 +50,11 @@ const Footer: React.FC<Props> = ({ location }) => {
   `)
 
   const isMobile = useMediaQuery({ maxWidth: "37.5em" })
-  const isHome = /^\/$/.test(location.pathname)
-  const isAdd = /^\/add\/?$/.test(location.pathname)
-  const isAbout = /^\/about\/?$/.test(location.pathname)
+  const isHome = new RegExp(`^${withPrefix("/")}$`).test(location.pathname)
+  const isAdd = new RegExp(`^${withPrefix("/add")}/?$`).test(location.pathname)
+  const isAbout = new RegExp(`^${withPrefix("/about")}/?$`).test(
+    location.pathname
+  )
 
   return isMobile ? (
     <footer className={styles.container}>

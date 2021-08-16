@@ -1,4 +1,4 @@
-import { graphql, Link, useStaticQuery } from "gatsby"
+import { graphql, Link, useStaticQuery, withPrefix } from "gatsby"
 import * as React from "react"
 import { useMediaQuery } from "react-responsive"
 import * as styles from "~/styles/components/header.module.css"
@@ -39,8 +39,10 @@ const Header: React.FC<Props> = ({ siteTitle = "", location }) => {
   `)
 
   const isMobile = useMediaQuery({ maxWidth: "37.5em" })
-  const isAdd = /^\/add\/?$/.test(location.pathname)
-  const isAbout = /^\/about\/?$/.test(location.pathname)
+  const isAdd = new RegExp(`^${withPrefix("/add")}/?$`).test(location.pathname)
+  const isAbout = new RegExp(`^${withPrefix("/about")}/?$`).test(
+    location.pathname
+  )
 
   return (
     <header className={styles.header}>

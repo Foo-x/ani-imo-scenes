@@ -1,6 +1,5 @@
 import { graphql, Link, useStaticQuery, withPrefix } from "gatsby"
 import * as React from "react"
-import { useMediaQuery } from "react-responsive"
 import * as styles from "~/styles/components/header.module.css"
 
 type Props = {
@@ -38,7 +37,6 @@ const Header: React.FC<Props> = ({ siteTitle = "", location }) => {
     }
   `)
 
-  const isMobile = useMediaQuery({ maxWidth: "37.5em" })
   const isAdd = new RegExp(`^${withPrefix("/add")}/?$`).test(location.pathname)
   const isAbout = new RegExp(`^${withPrefix("/about")}/?$`).test(
     location.pathname
@@ -50,38 +48,34 @@ const Header: React.FC<Props> = ({ siteTitle = "", location }) => {
         <h1 className={styles.title}>
           <Link to="/">{siteTitle}</Link>
         </h1>
-        {isMobile ? null : (
-          <ul className={styles.items}>
-            <li className={styles.item}>
-              <Link to="/add" replace={isAdd}>
-                <button className={styles.button}>
-                  <img
-                    className={styles.icon}
-                    src={
-                      isAdd ? data.add?.publicURL : data.addLineal?.publicURL
-                    }
-                    alt="add"
-                  />
-                </button>
-              </Link>
-            </li>
-            <li className={styles.item}>
-              <Link to="/about" replace={isAbout}>
-                <button className={styles.button}>
-                  <img
-                    className={styles.icon}
-                    src={
-                      isAbout
-                        ? data.about?.publicURL
-                        : data.aboutLineal?.publicURL
-                    }
-                    alt="about"
-                  />
-                </button>
-              </Link>
-            </li>
-          </ul>
-        )}
+        <ul className={styles.items}>
+          <li className={styles.item}>
+            <Link to="/add" replace={isAdd}>
+              <button className={styles.button}>
+                <img
+                  className={styles.icon}
+                  src={isAdd ? data.add?.publicURL : data.addLineal?.publicURL}
+                  alt="add"
+                />
+              </button>
+            </Link>
+          </li>
+          <li className={styles.item}>
+            <Link to="/about" replace={isAbout}>
+              <button className={styles.button}>
+                <img
+                  className={styles.icon}
+                  src={
+                    isAbout
+                      ? data.about?.publicURL
+                      : data.aboutLineal?.publicURL
+                  }
+                  alt="about"
+                />
+              </button>
+            </Link>
+          </li>
+        </ul>
       </div>
     </header>
   )

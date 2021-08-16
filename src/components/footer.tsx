@@ -50,9 +50,9 @@ const Footer: React.FC<Props> = ({ location }) => {
   `)
 
   const isMobile = useMediaQuery({ maxWidth: "37.5em" })
-  const isHome = location.pathname === "/"
-  const isAdd = location.pathname === "/add"
-  const isAbout = location.pathname === "/about"
+  const isHome = /^\/$/.test(location.pathname)
+  const isAdd = /^\/add\/?$/.test(location.pathname)
+  const isAbout = /^\/about\/?$/.test(location.pathname)
 
   return isMobile ? (
     <footer className={styles.container}>

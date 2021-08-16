@@ -39,8 +39,8 @@ const Header: React.FC<Props> = ({ siteTitle = "", location }) => {
   `)
 
   const isMobile = useMediaQuery({ maxWidth: "37.5em" })
-  const isAdd = location.pathname === "/add"
-  const isAbout = location.pathname === "/about"
+  const isAdd = /^\/add\/?$/.test(location.pathname)
+  const isAbout = /^\/about\/?$/.test(location.pathname)
 
   return (
     <header className={styles.header}>

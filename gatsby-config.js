@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `あにいも名場面集`,
     description: `あにはんといもはんの名場面を集めたサイトです。`,
-    siteUrl: `https://example.com/`,
+    siteUrl: `https://foo-x.github.io/ani-imo-scenes/`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

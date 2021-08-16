@@ -61,29 +61,6 @@ const AboutPage: React.FC<PageProps> = ({ location }) => {
         </a>
         ) です。
       </p>
-      <h2 className={styles.heading}>アクセス解析ツールについて</h2>
-      <p>
-        当サイトでは「Googleアナリティクス」を導入しています。このツールではデータを収集するためにCookieを使用しています。データは匿名で収集されており、個人を特定できるものではありません。
-      </p>
-      <p>
-        この機能はCookieを無効にすることで収集を拒否することが出来ますので、お使いのブラウザの設定をご確認いただけると幸いです。詳細は{" "}
-        <a
-          href="https://marketingplatform.google.com/about/analytics/terms/jp/"
-          target="_blank"
-          rel="nofollow noopener noreferrer"
-        >
-          Googleアナリティクスサービス利用規約
-        </a>{" "}
-        や{" "}
-        <a
-          href="https://policies.google.com/technologies/ads?hl=ja"
-          target="_blank"
-          rel="nofollow noopener noreferrer"
-        >
-          Googleポリシーと規約
-        </a>
-        をご覧ください。
-      </p>
       <h2 className={styles.heading}>ライセンス</h2>
       <div>
         Icons made by{" "}
@@ -92,10 +69,6 @@ const AboutPage: React.FC<PageProps> = ({ location }) => {
           title="Pixel perfect"
         >
           Pixel perfect
-        </a>{" "}
-        and{" "}
-        <a href="https://creativemarket.com/Becris" title="Becris">
-          Becris
         </a>{" "}
         from{" "}
         <a href="https://www.flaticon.com/" title="Flaticon">

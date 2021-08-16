@@ -36,13 +36,13 @@ const Footer: React.FC<Props> = ({ location }) => {
       }
       about: file(
         sourceInstanceName: { eq: "images" }
-        relativePath: { eq: "ellipsis.svg" }
+        relativePath: { eq: "info.svg" }
       ) {
         publicURL
       }
       aboutLineal: file(
         sourceInstanceName: { eq: "images" }
-        relativePath: { eq: "ellipsis_lineal.svg" }
+        relativePath: { eq: "info_lineal.svg" }
       ) {
         publicURL
       }

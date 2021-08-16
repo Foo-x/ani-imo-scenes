@@ -50,17 +50,27 @@ const AboutPage: React.FC<PageProps> = ({ location }) => {
         </a>{" "}
         で管理しています。シートの使い方はリンク先をご覧ください。
       </p>
-      <p>
-        管理人は「ふー」(
-        <a
-          href="https://twitter.com/f_akira_s"
-          target="_blank"
-          rel="nofollow noopener noreferrer"
-        >
-          @f_akira_s
-        </a>
-        ) です。
-      </p>
+      <h2 className={styles.heading}>お問い合わせ</h2>
+      <ul>
+        <li>
+          <a
+            href="https://github.com/Foo-x/ani-imo-scenes"
+            target="_blank"
+            rel="nofollow noopener noreferrer"
+          >
+            GitHub
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://twitter.com/f_akira_s"
+            target="_blank"
+            rel="nofollow noopener noreferrer"
+          >
+            Twitter
+          </a>
+        </li>
+      </ul>
     </Layout>
   )
 }

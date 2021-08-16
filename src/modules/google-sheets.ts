@@ -6,7 +6,6 @@ export type GetVideoInfo = {
   title: string
   person: string
   createdAt: string
-  createdBy: string
   videoId: string
   start: number
   end: number
@@ -21,7 +20,6 @@ export type PostVideoInfo = {
   end: string
   person: string
   createdAt: string
-  createdBy: string
 }
 
 export const getVideoInfos = async (): Promise<GetVideoInfo[] | undefined> => {

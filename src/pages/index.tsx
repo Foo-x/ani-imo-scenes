@@ -52,7 +52,6 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
                 <VideoCard
                   title={videoInfo.title}
                   createdAt={videoInfo.createdAt}
-                  createdBy={videoInfo.createdBy}
                   videoId={videoInfo.videoId}
                   start={videoInfo.start === -1 ? undefined : videoInfo.start}
                   end={videoInfo.end === -1 ? undefined : videoInfo.end}

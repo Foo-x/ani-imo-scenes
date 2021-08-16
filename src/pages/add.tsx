@@ -19,7 +19,6 @@ type FormData = {
   endMinutes: number
   endSeconds: number
   person: string
-  createdBy: string
 }
 
 const padNumber = (value: number): string => {
@@ -32,7 +31,6 @@ const AddPage: React.FC<PageProps> = ({ location }) => {
     handleSubmit,
     formState: { errors },
     reset,
-    setValue,
   } = useForm<FormData>()
 
   const onSubmit = handleSubmit(data => {
@@ -60,12 +58,10 @@ const AddPage: React.FC<PageProps> = ({ location }) => {
       end,
       person: data.person,
       createdAt,
-      createdBy: data.createdBy,
     }
     toast("追加ありがとうございます！")
     postVideoInfo(videoInfo)
     reset()
-    setValue("createdBy", data.createdBy)
   })
   return (
     <Layout location={location}>
@@ -294,20 +290,6 @@ const AddPage: React.FC<PageProps> = ({ location }) => {
           {errors.person && (
             <p className={styles.formInputErrorMessage}>
               {errors.person.message}
-            </p>
-          )}
-        </label>
-        <label className={styles.formLabel}>
-          <span className={styles.formLabelValue}>追加者</span>
-          <input
-            className={
-              errors.createdBy ? styles.formInputError : styles.formInput
-            }
-            {...register("createdBy", { required: requiredMessage })}
-          />
-          {errors.createdBy && (
-            <p className={styles.formInputErrorMessage}>
-              {errors.createdBy.message}
             </p>
           )}
         </label>

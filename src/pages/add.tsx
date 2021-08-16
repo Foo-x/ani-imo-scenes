@@ -280,7 +280,11 @@ const AddPage: React.FC<PageProps> = ({ location }) => {
         <label className={styles.formLabel}>
           <span className={styles.formLabelValue}>メインの人物</span>
           <select
-            className={errors.person ? styles.formInputError : styles.formInput}
+            className={
+              errors.person
+                ? styles.formInputSelectError
+                : styles.formInputSelect
+            }
             {...register("person", { required: requiredMessage })}
           >
             <option value="いもはん">いもはん</option>

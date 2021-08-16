@@ -38,6 +38,7 @@ const Seo: React.FC<Props> = ({
   const metaDescription = description || site?.siteMetadata?.description
   const defaultTitle = site?.siteMetadata?.title
   const actualTitle = title ? `${title} | ${defaultTitle}` : defaultTitle
+  const ogpUrl = new URL(ogp?.publicURL!, site?.siteMetadata?.siteUrl).href
 
   return (
     <Helmet
@@ -65,7 +66,7 @@ const Seo: React.FC<Props> = ({
           },
           {
             property: `og:image`,
-            content: site!.siteMetadata!.siteUrl! + ogp?.publicURL,
+            content: ogpUrl,
           },
           {
             name: `twitter:card`,

@@ -20,6 +20,9 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
   const videoInfos = useLiveQuery(
     async () => {
       const result = await db.videoInfos.toArray()
+      if (result.length > 0) {
+        setIsReady(true)
+      }
       result.sort((a, b) => b.createdAt.localeCompare(a.createdAt))
       return result
     },
@@ -29,7 +32,6 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
 
   useEffect(() => {
     if (Date.now() - (getLastFetched() ?? 0) < fetchInterval) {
-      setIsReady(true)
       return
     }
     getVideoInfos().then(_videoInfos => {
@@ -37,7 +39,6 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
         db.videoInfos.bulkPut(_videoInfos)
         setLastFetched()
       }
-      setIsReady(true)
     })
   }, [])
 

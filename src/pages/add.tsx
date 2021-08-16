@@ -31,6 +31,9 @@ const AddPage: React.FC<PageProps> = ({ location }) => {
     handleSubmit,
     formState: { errors },
     reset,
+    getValues,
+    setError,
+    clearErrors,
   } = useForm<FormData>()
 
   const onSubmit = handleSubmit(data => {
@@ -63,6 +66,57 @@ const AddPage: React.FC<PageProps> = ({ location }) => {
     postVideoInfo(videoInfo)
     reset()
   })
+
+  const timestampNames: (keyof FormData)[] = [
+    "startHours",
+    "startMinutes",
+    "startSeconds",
+    "endHours",
+    "endMinutes",
+    "endSeconds",
+  ]
+  const timestampErrorMessage =
+    "開始タイムスタンプは終了タイムスタンプより前である必要があります。"
+
+  const validateTimestamp = () => {
+    const {
+      startHours,
+      startMinutes,
+      startSeconds,
+      endHours,
+      endMinutes,
+      endSeconds,
+    } = getValues()
+    if (
+      Number.isNaN(startMinutes) ||
+      Number.isNaN(startSeconds) ||
+      Number.isNaN(endMinutes) ||
+      Number.isNaN(endSeconds)
+    ) {
+      return true
+    }
+
+    const result =
+      (Number.isNaN(startHours) ? 0 : startHours) * 3600 +
+        startMinutes * 60 +
+        startSeconds <
+      (Number.isNaN(endHours) ? 0 : endHours) * 3600 +
+        endMinutes * 60 +
+        endSeconds
+
+    if (result) {
+      clearErrors(timestampNames)
+      return true
+    }
+    timestampNames.forEach(name =>
+      setError(name, {
+        type: "validate",
+        message: timestampErrorMessage,
+      })
+    )
+    return timestampErrorMessage
+  }
+
   return (
     <Layout location={location}>
       <Seo title="名場面の追加" />
@@ -136,6 +190,7 @@ const AddPage: React.FC<PageProps> = ({ location }) => {
                   value: 0,
                   message: "開始時は0以上である必要があります。",
                 },
+                validate: validateTimestamp,
               })}
             />
             <span className={styles.formInputMultipleSeparator}>:</span>
@@ -157,6 +212,7 @@ const AddPage: React.FC<PageProps> = ({ location }) => {
                   value: 0,
                   message: "開始分は0以上である必要があります。",
                 },
+                validate: validateTimestamp,
               })}
             />
             <span className={styles.formInputMultipleSeparator}>:</span>
@@ -178,15 +234,16 @@ const AddPage: React.FC<PageProps> = ({ location }) => {
                   value: 0,
                   message: "開始秒は0以上である必要があります。",
                 },
+                validate: validateTimestamp,
               })}
             />
           </span>
-          {errors.startHours && (
+          {errors.startHours && errors.startHours.type !== "validate" && (
             <p className={styles.formInputErrorMessage}>
               {errors.startHours.message}
             </p>
           )}
-          {errors.startMinutes && (
+          {errors.startMinutes && errors.startMinutes.type !== "validate" && (
             <p className={styles.formInputErrorMessage}>
               {errors.startMinutes.message}
             </p>
@@ -212,6 +269,7 @@ const AddPage: React.FC<PageProps> = ({ location }) => {
                   value: 0,
                   message: "終了時は0以上である必要があります。",
                 },
+                validate: validateTimestamp,
               })}
             />
             <span className={styles.formInputMultipleSeparator}>:</span>
@@ -233,6 +291,7 @@ const AddPage: React.FC<PageProps> = ({ location }) => {
                   value: 0,
                   message: "終了分は0以上である必要があります。",
                 },
+                validate: validateTimestamp,
               })}
             />
             <span className={styles.formInputMultipleSeparator}>:</span>
@@ -254,15 +313,16 @@ const AddPage: React.FC<PageProps> = ({ location }) => {
                   value: 0,
                   message: "終了秒は0以上である必要があります。",
                 },
+                validate: validateTimestamp,
               })}
             />
           </span>
-          {errors.endHours && (
+          {errors.endHours && errors.endHours.type !== "validate" && (
             <p className={styles.formInputErrorMessage}>
               {errors.endHours.message}
             </p>
           )}
-          {errors.endMinutes && (
+          {errors.endMinutes && errors.endMinutes.type !== "validate" && (
             <p className={styles.formInputErrorMessage}>
               {errors.endMinutes.message}
             </p>

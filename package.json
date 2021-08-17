@@ -4,6 +4,7 @@
   "description": "ani imo scenes",
   "version": "0.1.0",
   "dependencies": {
+    "color-system": "git+https://github.com/Foo-x/color-system.git",
     "dexie": "^3.2.0-beta-2",
     "dexie-react-hooks": "^1.0.7",
     "gatsby": "^3.11.1",

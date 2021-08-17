@@ -55,13 +55,13 @@
 
 .formInputError,
 .formInputSelectError {
-  border-color: #d02f48;
-  outline-color: #d02f48;
+  border-color: var(--pccs-v2);
+  outline-color: var(--pccs-v2);
 }
 
 .formInputErrorMessage {
   margin-bottom: 0;
-  color: #d02f48;
+  color: var(--pccs-v2);
 }
 
 .formInputErrorMessage:first-of-type {
@@ -71,7 +71,7 @@
 .formSubmit {
   margin: var(--spacing-6) 0 0 auto;
   padding: 0.5rem 1rem;
-  background-color: #005ba5;
+  background-color: var(--pccs-v18);
   border-color: transparent;
   color: #fff;
   border-radius: 0.25rem;

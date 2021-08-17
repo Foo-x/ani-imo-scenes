@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   padding-top: 56.25%;
-  background-color: #d6d6d6;
+  background-color: var(--pccs-gy8_5);
 }
 
 .video {

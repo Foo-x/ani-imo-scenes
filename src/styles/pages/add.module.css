@@ -2,6 +2,10 @@
   font-size: var(--fontSize-4);
 }
 
+.heading:first-of-type {
+  margin-top: 0;
+}
+
 .form {
   display: flex;
   flex-direction: column;

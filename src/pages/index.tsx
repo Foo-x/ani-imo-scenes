@@ -7,7 +7,7 @@ import Seo from "~/components/seo"
 import VideoCard from "~/components/video-card"
 import { YouTubePlayerContext } from "~/contexts/youtube-context"
 import { db } from "~/modules/db"
-import { getVideoInfos } from "~/modules/google-sheets"
+import { GetVideoInfo, getVideoInfos } from "~/modules/google-sheets"
 import { getLastFetched, setLastFetched } from "~/modules/local-storage"
 import * as styles from "~/styles/pages/index.module.css"
 
@@ -16,18 +16,25 @@ const fetchInterval = 60000
 const IndexPage: React.FC<PageProps> = ({ location }) => {
   const [player, setPlayer] = useState<YT.Player | null>(null)
   const [isReady, setIsReady] = useState(false)
+  const [videoInfosOnMemory, setVideoInfosOnMemory] = useState<GetVideoInfo[]>(
+    []
+  )
 
   const videoInfos = useLiveQuery(
     async () => {
-      const result = await db.videoInfos.toArray()
-      if (result.length > 0) {
-        setIsReady(true)
+      try {
+        const result = await db.videoInfos.toArray()
+        if (result.length > 0) {
+          setIsReady(true)
+        }
+        result.sort((a, b) => b.createdAt.localeCompare(a.createdAt))
+        return result
+      } catch (_) {
+        return null
       }
-      result.sort((a, b) => b.createdAt.localeCompare(a.createdAt))
-      return result
     },
     [],
-    []
+    null
   )
 
   useEffect(() => {
@@ -36,8 +43,15 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
     }
     getVideoInfos().then(_videoInfos => {
       if (_videoInfos) {
-        db.videoInfos.bulkPut(_videoInfos)
-        setLastFetched()
+        db.videoInfos
+          .bulkPut(_videoInfos)
+          .then(_ => {
+            setLastFetched()
+          })
+          .catch(_ => {
+            setVideoInfosOnMemory(_videoInfos)
+            setIsReady(true)
+          })
       }
     })
   }, [])
@@ -47,7 +61,7 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
       <Seo />
       <YouTubePlayerContext.Provider value={[player, setPlayer]}>
         {isReady
-          ? videoInfos.map(videoInfo => (
+          ? (videoInfos ?? videoInfosOnMemory).map(videoInfo => (
               <div className={styles.videoCard} key={videoInfo.index}>
                 <VideoCard
                   title={videoInfo.title}

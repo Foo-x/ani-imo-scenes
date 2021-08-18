@@ -1,4 +1,3 @@
-import { exportDB, importInto } from "dexie-export-import"
 import { useLiveQuery } from "dexie-react-hooks"
 import { PageProps } from "gatsby"
 import React, { useEffect, useState } from "react"
@@ -36,7 +35,7 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
       } catch (_) {
         const fakeDbBlob = getFakeDb()
         if (fakeDbBlob) {
-          await importInto(fakeDb, fakeDbBlob)
+          await fakeDb.import(fakeDbBlob)
         }
         setActualDb(fakeDb)
         return []
@@ -55,7 +54,7 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
         if (_videoInfos) {
           actualDb.videoInfos.bulkPut(_videoInfos).then(async _ => {
             if (actualDb === fakeDb) {
-              setFakeDb(await exportDB(fakeDb))
+              setFakeDb(await fakeDb.export())
             }
             setLastFetched()
           })

@@ -1,3 +1,4 @@
+import { exportDB, importInto } from "dexie-export-import"
 import { useLiveQuery } from "dexie-react-hooks"
 import { PageProps } from "gatsby"
 import React, { useEffect, useState } from "react"
@@ -8,7 +9,12 @@ import VideoCard from "~/components/video-card"
 import { YouTubePlayerContext } from "~/contexts/youtube-context"
 import { db, fakeDb } from "~/modules/db"
 import { getVideoInfos } from "~/modules/google-sheets"
-import { getLastFetched, setLastFetched } from "~/modules/local-storage"
+import {
+  getFakeDb,
+  getLastFetched,
+  setFakeDb,
+  setLastFetched,
+} from "~/modules/local-storage"
 import * as styles from "~/styles/pages/index.module.css"
 
 const fetchInterval = 60000
@@ -28,6 +34,10 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
         result.sort((a, b) => b.createdAt.localeCompare(a.createdAt))
         return result
       } catch (_) {
+        const fakeDbBlob = getFakeDb()
+        if (fakeDbBlob) {
+          await importInto(fakeDb, fakeDbBlob)
+        }
         setActualDb(fakeDb)
         return []
       }
@@ -37,21 +47,20 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
   )
 
   useEffect(() => {
-    if (
-      actualDb !== fakeDb &&
-      Date.now() - (getLastFetched() ?? 0) < fetchInterval
-    ) {
-      return
-    }
-    getVideoInfos().then(_videoInfos => {
-      if (_videoInfos) {
-        actualDb.videoInfos
-          .bulkPut(_videoInfos)
-          .then(_ => {
+    actualDb.on("ready", () => {
+      if (Date.now() - (getLastFetched() ?? 0) < fetchInterval) {
+        return
+      }
+      getVideoInfos().then(_videoInfos => {
+        if (_videoInfos) {
+          actualDb.videoInfos.bulkPut(_videoInfos).then(async _ => {
+            if (actualDb === fakeDb) {
+              setFakeDb(await exportDB(fakeDb))
+            }
             setLastFetched()
           })
-          .catch(_ => setActualDb(fakeDb))
-      }
+        }
+      })
     })
   }, [actualDb])
 

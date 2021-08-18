@@ -6,6 +6,7 @@
   "dependencies": {
     "color-system": "git+https://github.com/Foo-x/color-system.git",
     "dexie": "^3.2.0-beta-2",
+    "dexie-export-import": "^1.0.3",
     "dexie-react-hooks": "^1.0.7",
     "fake-indexeddb": "^3.1.3",
     "gatsby": "^3.11.1",

@@ -1,11 +1,15 @@
-import Dexie from "dexie"
+import Dexie, { DexieOptions } from "dexie"
+// @ts-ignore
+import indexedDB from "fake-indexeddb"
+// @ts-ignore
+import IDBKeyRange from "fake-indexeddb/lib/FDBKeyRange"
 import { GetVideoInfo } from "./google-sheets"
 
 class DB extends Dexie {
   videoInfos: Dexie.Table<GetVideoInfo, number>
 
-  constructor() {
-    super("ani-imo-scenes-db")
+  constructor(options?: DexieOptions) {
+    super("ani-imo-scenes-db", options)
 
     this.version(1).stores({
       videoInfos:
@@ -17,3 +21,5 @@ class DB extends Dexie {
 }
 
 export const db = new DB()
+
+export const fakeDb = new DB({ indexedDB, IDBKeyRange })

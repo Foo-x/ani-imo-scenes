@@ -6,8 +6,8 @@ import Layout from "~/components/layout"
 import Seo from "~/components/seo"
 import VideoCard from "~/components/video-card"
 import { YouTubePlayerContext } from "~/contexts/youtube-context"
-import { db } from "~/modules/db"
-import { GetVideoInfo, getVideoInfos } from "~/modules/google-sheets"
+import { db, fakeDb } from "~/modules/db"
+import { getVideoInfos } from "~/modules/google-sheets"
 import { getLastFetched, setLastFetched } from "~/modules/local-storage"
 import * as styles from "~/styles/pages/index.module.css"
 
@@ -16,52 +16,51 @@ const fetchInterval = 60000
 const IndexPage: React.FC<PageProps> = ({ location }) => {
   const [player, setPlayer] = useState<YT.Player | null>(null)
   const [isReady, setIsReady] = useState(false)
-  const [videoInfosOnMemory, setVideoInfosOnMemory] = useState<GetVideoInfo[]>(
-    []
-  )
+  const [actualDb, setActualDb] = useState(db)
 
   const videoInfos = useLiveQuery(
     async () => {
       try {
-        const result = await db.videoInfos.toArray()
+        const result = await actualDb.videoInfos.toArray()
         if (result.length > 0) {
           setIsReady(true)
         }
         result.sort((a, b) => b.createdAt.localeCompare(a.createdAt))
         return result
       } catch (_) {
-        return null
+        setActualDb(fakeDb)
+        return []
       }
     },
-    [],
-    null
+    [actualDb],
+    []
   )
 
   useEffect(() => {
-    if (Date.now() - (getLastFetched() ?? 0) < fetchInterval) {
+    if (
+      actualDb !== fakeDb &&
+      Date.now() - (getLastFetched() ?? 0) < fetchInterval
+    ) {
       return
     }
     getVideoInfos().then(_videoInfos => {
       if (_videoInfos) {
-        db.videoInfos
+        actualDb.videoInfos
           .bulkPut(_videoInfos)
           .then(_ => {
             setLastFetched()
           })
-          .catch(_ => {
-            setVideoInfosOnMemory(_videoInfos)
-            setIsReady(true)
-          })
+          .catch(_ => setActualDb(fakeDb))
       }
     })
-  }, [])
+  }, [actualDb])
 
   return (
     <Layout location={location}>
       <Seo />
       <YouTubePlayerContext.Provider value={[player, setPlayer]}>
         {isReady
-          ? (videoInfos ?? videoInfosOnMemory).map(videoInfo => (
+          ? videoInfos.map(videoInfo => (
               <div className={styles.videoCard} key={videoInfo.index}>
                 <VideoCard
                   title={videoInfo.title}
